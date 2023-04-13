@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Produtos</title>
+  </head>
+  <body>
+    <h1>Cadastro de Produtos</h1>
+    <form method="POST" action="/adicionar_produto">
+      <label for="produto">Nome:</label>
+      <input type="text" id="produto" name="produto"><br><br>
+
+      <label for="marca">Marca:</label>
+      <textarea id="marca" name="marca"></textarea><br><br>
+
+      <label for="preco">Preço:</label>
+      <input type="number" id="preco" name="preco" step=".01"><br><br>
+
+      <label for="tipo">Tipo do produto:</label>
+      <textarea id="tipo" name="tipo"></textarea><br><br>
+
+      <label for="codigo_barras">Codigo de barras:</label>
+      <textarea id="codigo_barras" name="codigo_barras"></textarea><br><br>
+
+      <input type="submit" value="Cadastrar">
+      <button type="button" onclick="limpar()">Limpar</button>
+    </form>
+    <div id="mensagem"></div>
+
+    <script>
+      function limpar() {
+    document.getElementById("produto").value = "";
+    document.getElementById("marca").value = "";
+    document.getElementById("preco").value = "";
+    document.getElementById("tipo").value = "";
+    document.getElementById("codigo_barras").value = "";
+      }
+      
+      const form = document.querySelector('form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        fetch('/adicionar_produto', {
+          method: 'POST',
+          body: data
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+        document.getElementById("produto").value = "";
+        document.getElementById("marca").value = "";
+        document.getElementById("preco").value = "";
+        document.getElementById("tipo").value = "";
+        document.getElementById("codigo_barras").value = "";
+        document.getElementById("mensagem").innerHTML = "Cadastro realizado com sucesso!";
+      });
+    </script>
+  </body>
+</html>
+
+
+
