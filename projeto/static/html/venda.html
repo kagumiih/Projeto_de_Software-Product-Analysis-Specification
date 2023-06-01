@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulário de Venda</title>
+</head>
+<body>
+    <h1>Formulário de Venda</h1>
+    <form method="POST" action="/gerar_venda">
+        <label for="quantidade_venda">Qtde Venda:</label><br>
+        <input type="number" id="quantidade_venda" name="quantidade_venda" required><br><br>
+
+        <label for="valor_total">Valor Total:</label><br>
+        <input type="text" id="valor_total" name="valor_total" required><br><br>
+
+        <label for="desconto">Desconto:</label><br>
+        <input type="number" id="desconto" name="desconto" required><br><br>
+
+        <label for="forma_pagamento">Forma de Pagamento:</label><br>
+        <input type="text" id="forma_pagamento" name="forma_pagamento" required><br><br>
+
+        <label for="id_produto">Produto:</label><br>
+        <input type="number" id="id_produto" name="id_produto" required><br><br>
+
+        <label for="id_login">Login:</label><br>
+        <input type="number" id="id_login" name="id_login" required><br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+    <div id="mensagem"></div>
+    <script>
+        function limpar() {
+      document.getElementById("quantidade_venda").value = "";
+      document.getElementById("valor_total").value = "";
+      document.getElementById("desconto").value = "";
+      document.getElementById("forma_pagamento").value = "";
+      document.getElementById("id_produto").value = "";
+        }
+        
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const data = new FormData(form);
+          fetch('/gerar_venda', {
+            method: 'POST',
+            body: data
+          })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error(error));
+        document.getElementById("quantidade_venda").value = "";
+        document.getElementById("valor_total").value = "";
+        document.getElementById("desconto").value = "";
+        document.getElementById("forma_pagamento").value = "";
+        document.getElementById("id_produto").value = "";
+        document.getElementById("mensagem").innerHTML = "Cadastro realizado com sucesso!";
+        });
+      </script>
+</body>
+</html>
