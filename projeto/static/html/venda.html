@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulário de Venda</title>
+</head>
+<style>
+  :root {
+        --primary-color: #4CAF50;
+        --hover-color: #3e8e41;
+        --border-color: #ccc;
+      }
+    
+      form {
+        font-size: small;
+        font-family: Arial;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+    
+      label {
+        display: block;
+        margin-bottom: 1px;
+        font-weight: bold;
+      }
+    
+      input[type="text"],
+      input[type="email"],
+      textarea {
+        display: block;
+        width: 100%;
+        padding: 2px;
+        border: 2px solid var(--border-color);
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 2px;
+        font-size: 16px;
+      }
+    
+      input[type="submit"],
+      button[type="button"] {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+    
+      input[type="submit"]:hover,
+      button[type="button"]:hover {
+        background-color: var(--hover-color);
+      }
+
+      h1 {
+        color: #333;
+        padding: 10px;
+        margin: 0;
+      }
+    
+      /* Estilos de foco */
+      input:focus,
+      textarea:focus,
+      button:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+</style>
+
+
+<body>
+    <form method="POST" action="/gerar_venda">
+      <h1>Venda</h1>
+        <label for="quantidade_venda">Qtde Venda:</label><br>
+        <input type="number" id="quantidade_venda" name="quantidade_venda" required><br><br>
+
+        <label for="valor_total">Valor Total:</label><br>
+        <input type="text" id="valor_total" name="valor_total" required><br><br>
+
+        <label for="desconto">Desconto:</label><br>
+        <input type="number" id="desconto" name="desconto" required><br><br>
+
+        <label for="forma_pagamento">Forma de Pagamento:</label><br>
+        <input type="text" id="forma_pagamento" name="forma_pagamento" required><br><br>
+
+        <label for="id_produto">Produto:</label><br>
+        <input type="number" id="id_produto" name="id_produto" required><br><br>
+
+        <label for="id_login">Login:</label><br>
+        <input type="number" id="id_login" name="id_login" required><br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+    <div id="mensagem"></div>
+    <script>
+        function limpar() {
+      document.getElementById("quantidade_venda").value = "";
+      document.getElementById("valor_total").value = "";
+      document.getElementById("desconto").value = "";
+      document.getElementById("forma_pagamento").value = "";
+      document.getElementById("id_produto").value = "";
+        }
+        
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const data = new FormData(form);
+          fetch('/gerar_venda', {
+            method: 'POST',
+            body: data
+          })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error(error));
+        document.getElementById("quantidade_venda").value = "";
+        document.getElementById("valor_total").value = "";
+        document.getElementById("desconto").value = "";
+        document.getElementById("forma_pagamento").value = "";
+        document.getElementById("id_produto").value = "";
+        document.getElementById("mensagem").innerHTML = "Cadastro realizado com sucesso!";
+        });
+      </script>
+</body>
+</html>
