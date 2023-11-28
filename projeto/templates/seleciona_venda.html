@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Busca de Produto</title>
+    <style>
+        :root {
+        --primary-color: #4CAF50;
+        --hover-color: #3e8e41;
+        --border-color: #ccc;
+      }
+    
+      form {
+        font-family: Arial;
+        font-size: small;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+    
+      label {
+        display: block;
+        margin-bottom: 2px;
+        font-weight: bold;
+      }
+    
+      input[type="text"],
+      input[type="password"],
+      textarea {
+        display: block;
+        width: 100%;
+        padding: 2px;
+        border: 2px solid var(--border-color);
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 2px;
+        font-size: 16px;
+      }
+    
+      input[type="submit"],
+      button[type="button"] {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+    
+      input[type="submit"]:hover,
+      button[type="button"]:hover {
+        background-color: var(--hover-color);
+      }
+
+      h1 {
+        color: #333;
+        padding: 10px;
+        margin: 0;
+      }
+    
+      /* Estilos de foco */
+      input:focus,
+      textarea:focus,
+      button:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+    </style>
+</head>
+<body>
+    
+    {% if venda %}
+    <h2>Detalhes da Venda:</h2>
+    <p>Data da venda: {{ venda[2] }}</p>
+    <p>Valor: {{ venda[3] }}</p>
+    <p>Desconto: {{ venda[4] }}</p>
+    <p>Forma de pagamento: {{ venda[5] }}</p>
+    <p>Vendedor: {{venda[1]}} </p> 
+    {% endif %}
+    <button type="button" onclick="Voltar()">Voltar</button>
+</body>
+<script>
+  function Voltar() {
+      window.history.back();
+  }
+</script>
+</html>
